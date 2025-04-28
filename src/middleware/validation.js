@@ -79,6 +79,49 @@ const schemas = {
         email: Joi.string().email(),
         vehicleColor: Joi.string(),
     }),
+
+    // Carousel item creation validation
+    createCarouselItem: Joi.object({
+        title: Joi.string().required().messages({
+            'any.required': 'Title is required',
+        }),
+        description: Joi.string(),
+        imageUrl: Joi.string().required().uri().messages({
+            'any.required': 'Image URL is required',
+            'string.uri': 'Image URL must be a valid URI',
+        }),
+        linkUrl: Joi.string().uri().messages({
+            'string.uri': 'Link URL must be a valid URI',
+        }),
+        altText: Joi.string().required().messages({
+            'any.required': 'Alt text is required for accessibility',
+        }),
+        isActive: Joi.boolean().default(true),
+        displayOrder: Joi.number().integer().min(0).default(0),
+        startDate: Joi.date(),
+        endDate: Joi.date().min(Joi.ref('startDate')).messages({
+            'date.min': 'End date must be after start date',
+        }),
+    }),
+
+    // Carousel item update validation
+    updateCarouselItem: Joi.object({
+        title: Joi.string(),
+        description: Joi.string(),
+        imageUrl: Joi.string().uri().messages({
+            'string.uri': 'Image URL must be a valid URI',
+        }),
+        linkUrl: Joi.string().uri().messages({
+            'string.uri': 'Link URL must be a valid URI',
+        }),
+        altText: Joi.string(),
+        isActive: Joi.boolean(),
+        displayOrder: Joi.number().integer().min(0),
+        startDate: Joi.date(),
+        endDate: Joi.date().min(Joi.ref('startDate')).messages({
+            'date.min': 'End date must be after start date',
+        }),
+    }),
 };
 
 module.exports = {
