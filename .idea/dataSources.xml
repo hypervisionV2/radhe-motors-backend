@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="radhe-motors-dev@radhe-motors.okiaceo.mongodb.net" uuid="d1083670-db09-4da9-a02c-8970cb84ce86">
+      <driver-ref>mongo.4</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.dbschema.MongoJdbcDriver</jdbc-driver>
+      <jdbc-url>mongodb+srv://radhe-motors.okiaceo.mongodb.net/radhe-motors-dev?retryWrites=true&amp;w=majority&amp;appName=radhe-motors</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
