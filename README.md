@@ -10,7 +10,7 @@ This project provides the backend REST API for a TVS automotive dealership websi
 - Enabling users to book appointments for test rides or purchases
 - Storing customer information when they express interest in vehicles
 - Providing showroom information
-- Serving carousel content for the website homepage
+- Serving carousel content for the website homepage 
 
 ## Getting Started
 
