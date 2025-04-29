@@ -36,6 +36,9 @@ const errorHandler = (err, req, res, next) => {
     if (err.statusCode) {
         statusCode = err.statusCode;
         message = err.message;
+        if (err.errors && Array.isArray(err.errors)) {
+            errors = err.errors;
+        }
     }
 
     res.status(statusCode).json({
@@ -50,9 +53,10 @@ const errorHandler = (err, req, res, next) => {
  * Custom error class for API errors
  */
 class ApiError extends Error {
-    constructor(message, statusCode) {
+    constructor(message, statusCode, errors = []) {
         super(message);
         this.statusCode = statusCode;
+        this.errors = errors;
         Error.captureStackTrace(this, this.constructor);
     }
 }

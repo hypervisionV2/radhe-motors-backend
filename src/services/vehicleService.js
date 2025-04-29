@@ -72,7 +72,59 @@ const getVehicleById = async (id) => {
     return vehicle;
 };
 
+/**
+ * Create a new vehicle
+ * @param {Object} vehicleData - Vehicle data
+ * @returns {Promise<Object>} Created vehicle
+ */
+const createVehicle = async (vehicleData) => {
+    const vehicle = await Vehicle.create(vehicleData);
+    return vehicle;
+};
+
+/**
+ * Update a vehicle
+ * @param {String} id - Vehicle ID
+ * @param {Object} vehicleData - Updated vehicle data
+ * @returns {Promise<Object>} Updated vehicle
+ */
+const updateVehicle = async (id, vehicleData) => {
+    const vehicle = await Vehicle.findByIdAndUpdate(
+        id,
+        vehicleData,
+        { new: true, runValidators: true }
+    );
+
+    if (!vehicle) {
+        throw new ApiError(ERROR_MESSAGES.NOT_FOUND, 404);
+    }
+
+    return vehicle;
+};
+
+/**
+ * Delete a vehicle (soft delete)
+ * @param {String} id - Vehicle ID
+ * @returns {Promise<Boolean>} True if deleted successfully
+ */
+const deleteVehicle = async (id) => {
+    const vehicle = await Vehicle.findByIdAndUpdate(
+        id,
+        { isActive: false },
+        { new: true }
+    );
+
+    if (!vehicle) {
+        throw new ApiError(ERROR_MESSAGES.NOT_FOUND, 404);
+    }
+
+    return true;
+};
+
 module.exports = {
     getAllVehicles,
-    getVehicleById
+    getVehicleById,
+    createVehicle,
+    updateVehicle,
+    deleteVehicle
 };

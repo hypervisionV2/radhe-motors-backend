@@ -38,6 +38,6 @@ module.exports = {
     VEHICLE_TYPES: {
         SCOOTER: 'Scooter',
         MOTORCYCLE: 'Motorcycle',
-        THREEWHEELER: '3-Wheeler',
+        ELECTRIC: 'Electric',
     },
 };

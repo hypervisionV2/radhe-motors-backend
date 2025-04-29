@@ -4,7 +4,83 @@ const User = require('../models/userModel');
 const Vehicle = require('../models/vehicleModel');
 const Showroom = require('../models/showroomModel');
 const { ApiError } = require('../middleware/errorHandler');
-const { APPOINTMENT_STATUS, ERROR_MESSAGES } = require('../config/app');
+const { APPOINTMENT_STATUS, ERROR_MESSAGES, PAGINATION } = require('../config/app');
+
+/**
+ * Get all appointments with filters and pagination
+ * @param {Object} filters - Filter criteria
+ * @param {Number} page - Page number
+ * @param {Number} limit - Items per page
+ * @returns {Promise<Object>} Appointments and pagination data
+ */
+const getAllAppointments = async (filters = {}, page = PAGINATION.DEFAULT_PAGE, limit = PAGINATION.DEFAULT_LIMIT) => {
+    // Build query
+    const query = {};
+
+    if (filters.status) {
+        query.status = filters.status;
+    }
+
+    if (filters.date) {
+        const startDate = new Date(filters.date);
+        startDate.setHours(0, 0, 0, 0);
+
+        const endDate = new Date(filters.date);
+        endDate.setHours(23, 59, 59, 999);
+
+        query.date = { $gte: startDate, $lte: endDate };
+    }
+
+    if (filters.showroomId) {
+        query.showroomId = filters.showroomId;
+    }
+
+    if (filters.userId) {
+        query.userId = filters.userId;
+    }
+
+    // Execute query with pagination
+    const skip = (page - 1) * limit;
+
+    const [appointments, total] = await Promise.all([
+        Appointment.find(query)
+            .sort({ date: 1, time: 1 })
+            .skip(skip)
+            .limit(limit)
+            .populate('userId', 'name phone email')
+            .populate('vehicleId', 'name model thumbnailUrl')
+            .populate('showroomId', 'name address.city'),
+        Appointment.countDocuments(query)
+    ]);
+
+    return {
+        appointments,
+        pagination: {
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit),
+        }
+    };
+};
+
+/**
+ * Get appointment by ID
+ * @param {String} id - Appointment ID
+ * @returns {Promise<Object>} Appointment data
+ */
+const getAppointmentById = async (id) => {
+    const appointment = await Appointment.findById(id)
+        .populate('userId', 'name phone email')
+        .populate('vehicleId', 'name model thumbnailUrl')
+        .populate('showroomId', 'name address contact operatingHours');
+
+    if (!appointment) {
+        throw new ApiError(ERROR_MESSAGES.NOT_FOUND, 404);
+    }
+
+    return appointment;
+};
 
 /**
  * Create appointment with user information
@@ -100,6 +176,45 @@ const createAppointment = async (appointmentData) => {
     }
 };
 
+/**
+ * Update an appointment
+ * @param {String} id - Appointment ID
+ * @param {Object} appointmentData - Updated appointment data
+ * @returns {Promise<Object>} Updated appointment
+ */
+const updateAppointment = async (id, appointmentData) => {
+    const appointment = await Appointment.findByIdAndUpdate(
+        id,
+        appointmentData,
+        { new: true, runValidators: true }
+    );
+
+    if (!appointment) {
+        throw new ApiError(ERROR_MESSAGES.NOT_FOUND, 404);
+    }
+
+    return appointment;
+};
+
+/**
+ * Delete an appointment
+ * @param {String} id - Appointment ID
+ * @returns {Promise<Boolean>} True if deleted successfully
+ */
+const deleteAppointment = async (id) => {
+    const appointment = await Appointment.findByIdAndDelete(id);
+
+    if (!appointment) {
+        throw new ApiError(ERROR_MESSAGES.NOT_FOUND, 404);
+    }
+
+    return true;
+};
+
 module.exports = {
-    createAppointment
+    getAllAppointments,
+    getAppointmentById,
+    createAppointment,
+    updateAppointment,
+    deleteAppointment
 };

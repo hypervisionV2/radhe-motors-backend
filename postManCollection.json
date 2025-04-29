@@ -1,0 +1,1005 @@
+{
+  "info": {
+    "_postman_id": "f8a6b0c5-4e5c-4c4a-b456-d3a50e5a7f89",
+    "name": "TVS-RS-Automotive",
+    "description": "Complete API collection for TVS-RS Automotive Dealer Website",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Vehicles",
+      "item": [
+        {
+          "name": "Get All Vehicles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "type",
+                  "value": "Scooter",
+                  "disabled": true
+                },
+                {
+                  "key": "minPrice",
+                  "value": "50000",
+                  "disabled": true
+                },
+                {
+                  "key": "maxPrice",
+                  "value": "100000",
+                  "disabled": true
+                },
+                {
+                  "key": "isPopular",
+                  "value": "true",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all vehicles with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Vehicle by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            },
+            "description": "Get details of a specific vehicle by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Vehicle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"model\": \"Jupiter 125\",\n    \"name\": \"TVS Jupiter 125\",\n    \"type\": \"Scooter\",\n    \"price\": {\n        \"base\": 85000,\n        \"onRoad\": 95000,\n        \"variants\": [\n            {\n                \"name\": \"Standard\",\n                \"price\": 85000\n            },\n            {\n                \"name\": \"Deluxe\",\n                \"price\": 95000\n            }\n        ]\n    },\n    \"colors\": [\n        {\n            \"name\": \"Red\",\n            \"hexCode\": \"#FF0000\",\n            \"imageUrls\": [\"https://example.com/images/jupiter-red-1.jpg\"]\n        },\n        {\n            \"name\": \"Blue\",\n            \"hexCode\": \"#0000FF\",\n            \"imageUrls\": [\"https://example.com/images/jupiter-blue-1.jpg\"]\n        }\n    ],\n    \"specifications\": {\n        \"engine\": \"124.8 cc\",\n        \"displacement\": \"124.8 cc\",\n        \"mileage\": \"62 kmpl\",\n        \"power\": \"8.15 PS\",\n        \"torque\": \"10.5 Nm\",\n        \"brakes\": \"Drum\",\n        \"suspension\": \"Telescopic\"\n    },\n    \"features\": [\"LED Headlight\", \"Digital Console\", \"USB Charging\"],\n    \"imageUrls\": [\"https://example.com/images/jupiter-1.jpg\"],\n    \"thumbnailUrl\": \"https://example.com/images/jupiter-thumb.jpg\",\n    \"isActive\": true,\n    \"isPopular\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles"
+              ]
+            },
+            "description": "Create a new vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Vehicle",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"price\": {\n        \"base\": 87000,\n        \"onRoad\": 97000\n    },\n    \"isPopular\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            },
+            "description": "Update an existing vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Vehicle",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/vehicles/{{vehicleId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "vehicles",
+                "{{vehicleId}}"
+              ]
+            },
+            "description": "Delete (soft delete) a vehicle"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for vehicle management"
+    },
+    {
+      "name": "Appointments",
+      "item": [
+        {
+          "name": "Get All Appointments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "status",
+                  "value": "Pending",
+                  "disabled": true
+                },
+                {
+                  "key": "date",
+                  "value": "2025-05-15",
+                  "disabled": true
+                },
+                {
+                  "key": "showroomId",
+                  "value": "{{showroomId}}",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all appointments with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Appointment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{appointmentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "{{appointmentId}}"
+              ]
+            },
+            "description": "Get details of a specific appointment"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Appointment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"vehicleId\": \"{{vehicleId}}\",\n    \"showroomId\": \"{{showroomId}}\",\n    \"date\": \"2025-05-15\",\n    \"time\": \"10:30\",\n    \"purpose\": \"Test Ride\",\n    \"name\": \"John Doe\",\n    \"phone\": \"9876543210\",\n    \"email\": \"john.doe@example.com\",\n    \"vehicleColor\": \"Red\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments"
+              ]
+            },
+            "description": "Book an appointment for a test ride or purchase discussion"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Appointment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"status\": \"Confirmed\",\n    \"date\": \"2025-05-20\",\n    \"time\": \"11:30\",\n    \"notes\": \"Customer rescheduled\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{appointmentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "{{appointmentId}}"
+              ]
+            },
+            "description": "Update an existing appointment"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Appointment",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/appointments/{{appointmentId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "appointments",
+                "{{appointmentId}}"
+              ]
+            },
+            "description": "Delete an appointment"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for appointment management"
+    },
+    {
+      "name": "Showrooms",
+      "item": [
+        {
+          "name": "Get All Showrooms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms"
+              ]
+            },
+            "description": "Get all active showrooms"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Showroom by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/{{showroomId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "{{showroomId}}"
+              ]
+            },
+            "description": "Get details of a specific showroom by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Showroom",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"TVS Burdwan Road\",\n    \"address\": {\n        \"street\": \"123 Burdwan Road\",\n        \"city\": \"Kolkata\",\n        \"state\": \"West Bengal\",\n        \"pincode\": \"700001\",\n        \"landmark\": \"Near City Mall\"\n    },\n    \"contact\": {\n        \"phone\": \"9876543210\",\n        \"email\": \"burdwan.tvs@example.com\",\n        \"alternatePhone\": \"9876543211\"\n    },\n    \"geoLocation\": {\n        \"latitude\": 22.5726,\n        \"longitude\": 88.3639\n    },\n    \"operatingHours\": {\n        \"monday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"tuesday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"wednesday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"thursday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"friday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"saturday\": { \"open\": \"09:00\", \"close\": \"18:00\" },\n        \"sunday\": { \"open\": \"10:00\", \"close\": \"16:00\" }\n    },\n    \"imageUrls\": [\"https://example.com/images/showroom-burdwan.jpg\"],\n    \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms"
+              ]
+            },
+            "description": "Create a new showroom"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Showroom",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"contact\": {\n        \"phone\": \"9876543212\",\n        \"email\": \"burdwan.road.tvs@example.com\"\n    },\n    \"operatingHours\": {\n        \"sunday\": { \"open\": \"11:00\", \"close\": \"15:00\" }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/{{showroomId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "{{showroomId}}"
+              ]
+            },
+            "description": "Update an existing showroom"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Showroom",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/showrooms/{{showroomId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "showrooms",
+                "{{showroomId}}"
+              ]
+            },
+            "description": "Delete (soft delete) a showroom"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for showroom management"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users?page=1&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "search",
+                  "value": "john",
+                  "disabled": true
+                }
+              ]
+            },
+            "description": "Get all users with optional search and pagination"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "Get details of a specific user"
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Jane Smith\",\n    \"phone\": \"9876543220\",\n    \"email\": \"jane.smith@example.com\",\n    \"address\": {\n        \"street\": \"456 Park Street\",\n        \"city\": \"Kolkata\",\n        \"state\": \"West Bengal\",\n        \"pincode\": \"700016\"\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "Create a new user"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"jane.updated@example.com\",\n    \"address\": {\n        \"street\": \"458 Park Street\",\n        \"city\": \"Kolkata\"\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "Update an existing user"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}"
+              ]
+            },
+            "description": "Delete a user"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Vehicle Interest",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"vehicleId\": \"{{vehicleId}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/interest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}",
+                "interest"
+              ]
+            },
+            "description": "Add a vehicle to user's interested vehicles"
+          },
+          "response": []
+        },
+        {
+          "name": "Add Contact History",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"employeeId\": \"{{employeeId}}\",\n    \"notes\": \"Customer is interested in finance options\",\n    \"status\": \"Interested\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/users/{{userId}}/contact",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "{{userId}}",
+                "contact"
+              ]
+            },
+            "description": "Add contact history to a user"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for user management"
+    },
+    {
+      "name": "Carousel",
+      "item": [
+        {
+          "name": "Get Carousel Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/carousel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "carousel"
+              ]
+            },
+            "description": "Get all active carousel items"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Carousel Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"New TVS Jupiter\",\n    \"description\": \"Limited time offer with special discount\",\n    \"imageUrl\": \"https://storage-service.example.com/carousel/jupiter-offer.jpg\",\n    \"linkUrl\": \"/vehicles/123456789\",\n    \"altText\": \"TVS Jupiter Special Offer\",\n    \"isActive\": true,\n    \"displayOrder\": 1,\n    \"startDate\": \"2025-04-01\",\n    \"endDate\": \"2025-05-30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/carousel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "carousel"
+              ]
+            },
+            "description": "Create a new carousel item"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Carousel Item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"title\": \"Updated TVS Jupiter Offer\",\n    \"description\": \"Limited time offer with extended validity\",\n    \"isActive\": true,\n    \"endDate\": \"2025-06-30\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/carousel/{{carouselId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "carousel",
+                "{{carouselId}}"
+              ]
+            },
+            "description": "Update an existing carousel item"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Carousel Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/carousel/{{carouselId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "carousel",
+                "{{carouselId}}"
+              ]
+            },
+            "description": "Delete a carousel item"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for carousel management"
+    },
+    {
+      "name": "Image Uploads",
+      "item": [
+        {
+          "name": "Upload Vehicle Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/vehicles",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "vehicles"
+              ]
+            },
+            "description": "Upload a single image for a vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Multiple Vehicle Images",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "images",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "images",
+                  "type": "file",
+                  "src": ""
+                },
+                {
+                  "key": "images",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/vehicles/multiple",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "vehicles",
+                "multiple"
+              ]
+            },
+            "description": "Upload multiple images for a vehicle"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Carousel Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/carousel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "carousel"
+              ]
+            },
+            "description": "Upload an image for a carousel item"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload Showroom Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/showrooms",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "showrooms"
+              ]
+            },
+            "description": "Upload an image for a showroom"
+          },
+          "response": []
+        },
+        {
+          "name": "Upload General Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/general",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "general"
+              ]
+            },
+            "description": "Upload a general image"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Image",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/uploads/{{publicId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "uploads",
+                "{{publicId}}"
+              ]
+            },
+            "description": "Delete an image from Cloudinary using its public ID"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for image uploads and management"
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        },
+        "description": "Check if the server is running"
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "Base URL for the API"
+    },
+    {
+      "key": "vehicleId",
+      "value": "",
+      "type": "string",
+      "description": "ID of a vehicle"
+    },
+    {
+      "key": "showroomId",
+      "value": "",
+      "type": "string",
+      "description": "ID of a showroom"
+    },
+    {
+      "key": "carouselId",
+      "value": "",
+      "type": "string",
+      "description": "ID of a carousel item"
+    },
+    {
+      "key": "appointmentId",
+      "value": "",
+      "type": "string",
+      "description": "ID of an appointment"
+    },
+    {
+      "key": "userId",
+      "value": "",
+      "type": "string",
+      "description": "ID of a user"
+    },
+    {
+      "key": "employeeId",
+      "value": "",
+      "type": "string",
+      "description": "ID of an employee"
+    },
+    {
+      "key": "publicId",
+      "value": "",
+      "type": "string",
+      "description": "Public ID of an uploaded image in Cloudinary"
+    }
+  ]
+}

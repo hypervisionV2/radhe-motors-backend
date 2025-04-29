@@ -50,7 +50,40 @@ const getVehicleById = asyncHandler(async (req, res) => {
     return successResponse(res, 200, 'Vehicle retrieved successfully', vehicle);
 });
 
+/**
+ * @desc    Create a new vehicle
+ * @route   POST /api/vehicles
+ * @access  Private (Admin)
+ */
+const createVehicle = asyncHandler(async (req, res) => {
+    const vehicle = await vehicleService.createVehicle(req.body);
+    return successResponse(res, 201, 'Vehicle created successfully', vehicle);
+});
+
+/**
+ * @desc    Update a vehicle
+ * @route   PUT /api/vehicles/:id
+ * @access  Private (Admin)
+ */
+const updateVehicle = asyncHandler(async (req, res) => {
+    const vehicle = await vehicleService.updateVehicle(req.params.id, req.body);
+    return successResponse(res, 200, 'Vehicle updated successfully', vehicle);
+});
+
+/**
+ * @desc    Delete a vehicle
+ * @route   DELETE /api/vehicles/:id
+ * @access  Private (Admin)
+ */
+const deleteVehicle = asyncHandler(async (req, res) => {
+    await vehicleService.deleteVehicle(req.params.id);
+    return successResponse(res, 200, 'Vehicle deleted successfully');
+});
+
 module.exports = {
     getAllVehicles,
-    getVehicleById
+    getVehicleById,
+    createVehicle,
+    updateVehicle,
+    deleteVehicle
 };
